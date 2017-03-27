@@ -24,7 +24,7 @@ public class HomeScreen extends AppCompatActivity {
 
     /** Called when the user clicks the Settings button */
     public void goToSettings(View view) {
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, NewSettings.class);
         startActivity(intent);
     }
 
