@@ -1,5 +1,4 @@
 package com.example.tyler.hemoglobinmonitor;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,9 +15,8 @@ import android.content.Intent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 
-
-
 public class NewSettings extends AppCompatActivity {
+
     //Widgets
     Button btnPaired;
     ListView deviceList;
@@ -31,10 +29,8 @@ public class NewSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_settings);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        btnPaired = (Button)findViewById(R.id.btnBluetooth);
+        btnPaired = (Button)findViewById(R.id.btnPairedDevices);
         deviceList = (ListView)findViewById(R.id.lstDevices);
 
         myBluetooth = BluetoothAdapter.getDefaultAdapter();
@@ -62,7 +58,6 @@ public class NewSettings extends AppCompatActivity {
                 pairedDevicesList(); //method that will be called
             }
         });
-
     }
 
     private void pairedDevicesList()
@@ -96,11 +91,10 @@ public class NewSettings extends AppCompatActivity {
             String info = ((TextView) v).getText().toString();
             String address = info.substring(info.length() - 17);
             // Make an intent to start next activity.
-            Intent i = new Intent(NewSettings.this, HomeScreen.class);
+            Intent i = new Intent(NewSettings.this, Transmissions.class);
             //Change the activity.
             i.putExtra(EXTRA_ADDRESS, address); //this will be received at ledControl (class) Activity
             startActivity(i);
         }
     };
-
 }
