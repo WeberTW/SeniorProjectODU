@@ -11,7 +11,7 @@
     tools:context="com.example.tyler.hemoglobinmonitor.Transmissions">
 
     <Button
-        android:text="Get Values"
+        android:text="@string/transmission_getValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -23,25 +23,20 @@
         android:id="@+id/btnGetValues" />
 
     <Button
-        android:text="Disconnect"
+        android:text="@string/transmission_disconnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="71dp"
+        android:id="@+id/btnDisconnect"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnGetValues"
-        android:layout_alignStart="@+id/btnGetValues"
-        android:layout_marginBottom="72dp"
-        android:id="@+id/btnDisconnect" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="*nothing yet"
+        android:text="@string/transmission_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnGetValues"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="77dp"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="86dp"
-        android:id="@+id/label" />
+        android:id="@+id/label"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

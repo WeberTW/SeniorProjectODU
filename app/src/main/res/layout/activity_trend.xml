@@ -12,7 +12,7 @@
     tools:context="com.example.tyler.hemoglobinmonitor.TrendActivity">
 
     <com.jjoe64.graphview.GraphView
-        android:layout_width="match_parent"
+        android:layout_width="340dip"
         android:layout_height="250dip"
         android:id="@+id/graph" />
 
