@@ -14,17 +14,8 @@
         <activity android:name=".HomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".HomeScreen">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tyler.hemoglobinmonitor.HomeScreen" />
         </activity>
         <activity
             android:name=".HelpActivity"
@@ -40,6 +31,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tyler.hemoglobinmonitor.HomeScreen" />
         </activity>
+
+        <activity
+            android:name=".NewSettings"
+            android:label="@string/title_activity_settings">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tyler.hemoglobinmonitor.HomeScreen" />
+        </activity>
+
+        <activity
+            android:name=".Transmissions"
+            android:label="@string/title_activity_transmissions">
+        </activity>
+    </application>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -47,11 +52,5 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".NewSettings"
-            android:label="@string/title_activity_new_settings"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-    </application>
 
 </manifest>

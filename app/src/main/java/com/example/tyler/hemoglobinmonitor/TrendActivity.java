@@ -13,6 +13,11 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class TrendActivity extends AppCompatActivity {
 
     /**
@@ -45,37 +50,73 @@ public class TrendActivity extends AppCompatActivity {
     }
 
     private void createGraph() {
+        //Get the values
+        //Need the input file
+        FileInputStream inStream = null;
+        try {
+            inStream = openFileInput("Values.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //Now we need to get the values
+        int c; int count = 0;
+        String displayValue = "";
+        ArrayList<Float> myList = new ArrayList<Float>();
+        try {
+            while( (c = inStream.read()) != -1 && count <= 10){
+                //If we have a space, do the next part
+                if(c == 32) {
+                    //Turn the string into a float
+                    Float value = Float.parseFloat(displayValue);
+
+                    //Save to a running list we will display
+                    myList.add(value);
+
+                    //Stop at 10 values
+                    count++;
+
+                    //Reset displayValue for next value
+                    displayValue = "";
+                }
+                //If not, then we can continue making the value
+                else {
+                    displayValue = displayValue + Character.toString((char)c);
+                }
+            }
+            inStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //Create the graph
         GraphView graph = (GraphView) findViewById(R.id.graph);
 
         //Add the values
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 15.00),
-                new DataPoint(1, 16.00),
-                new DataPoint(2, 16.50),
-                new DataPoint(3, 14.00),
-                new DataPoint(4, 16.50),
-                new DataPoint(5, 15.75),
-                new DataPoint(6, 16.25),
-                new DataPoint(7, 16.70),
-                new DataPoint(8, 14.80),
-                new DataPoint(9, 18.50),
-                new DataPoint(10, 16.00),
-                new DataPoint(11, 15.00),
-                new DataPoint(12, 15.75)
-        });
+        DataPoint[] dataValues = new DataPoint[myList.size()];
+        int size = myList.size();
+        int j = size-1;
+        for(int i=0; i < myList.size(); i++) {
+            DataPoint k = new DataPoint(i, myList.get(j));
+            j--;
+            dataValues[i] = k;
+        }
+
+        //Graph the values
+        LineGraphSeries<DataPoint> series;
+        series = new LineGraphSeries<>(dataValues);
         series.setColor(Color.BLUE);
         graph.addSeries(series);
 
         // Format the graph
-        graph.getGridLabelRenderer().setHorizontalAxisTitle("Time Measurement Was Taken");
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("Time (Newest Measurement on Right)");
         graph.getGridLabelRenderer().setVerticalAxisTitle("Hemoglobin Value (g/dL)");
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(20);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(12);
+        graph.getViewport().setMaxX(10);
     }
 
     /**
